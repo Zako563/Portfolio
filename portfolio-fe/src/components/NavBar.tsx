@@ -4,10 +4,7 @@ import { NavLink } from 'react-router-dom';
 
 const navigationItems = [
   { label: 'Home', path: PathRoutes.HomePage },
-  { label: 'Menu', path: '/menu' },
-  { label: 'Order', path: '/menuOrder' },
-  { label: 'Contact', path: '/contact' },
-  { label: 'Account', path: '/profile' },
+  { label: 'Account', path: '/zako' },
 ];
 
 export const NavBar: React.FC = () => {
