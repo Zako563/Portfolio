@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { zakoResponseModel } from './model/zakoResponseModel';
 import { getAllzako } from './api/getAllZako';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './ZakoList.css';
 
 const ZakoList: React.FC = (): JSX.Element => {
   const [zakoItems, setZakoItems] = useState<zakoResponseModel[]>([]);

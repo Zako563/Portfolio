@@ -1,6 +1,34 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate from react-router-dom
 import './HomePage.css';
+
+const MatrixColumn: React.FC<{ index: number, matrixDestroyed: boolean }> = memo(({ index, matrixDestroyed }) => {
+  const randomLetters = Array.from({ length: 20 }, () =>
+    String.fromCharCode(0x30a0 + Math.random() * (0x30ff - 0x30a0))
+  ).join('');
+  
+  return (
+    <div
+      className={`matrixColumn ${matrixDestroyed ? 'destroyed' : ''}`} // Add destroyed class for animation
+      style={{
+        left: `${index * 3.5}%`,
+        '--delay': Math.random(),
+      } as React.CSSProperties}
+    >
+      {randomLetters.split('').map((char, idx) => (
+        <span key={idx}>{char}</span>
+      ))}
+    </div>
+  );
+});
+
+const MatrixRain: React.FC<{ matrixDestroyed: boolean }> = memo(({ matrixDestroyed }) => {
+  const columns = [];
+  for (let i = 0; i < 30; i++) {
+    columns.push(<MatrixColumn key={i} index={i} matrixDestroyed={matrixDestroyed} />);
+  }
+  return <div className="matrixRain">{columns}</div>;
+});
 
 export const Home: React.FC = () => {
   const [typedText, setTypedText] = useState('');
@@ -24,30 +52,6 @@ export const Home: React.FC = () => {
     return () => clearInterval(typingInterval); // Cleanup interval on unmount
   }, [fullText]);
 
-  const createMatrixColumns = () => {
-    const columns = [];
-    for (let i = 0; i < 30; i++) {
-      const randomLetters = Array.from({ length: 20 }, () =>
-        String.fromCharCode(0x30a0 + Math.random() * (0x30ff - 0x30a0))
-      ).join('');
-      columns.push(
-        <div
-          key={i}
-          className={`matrixColumn ${matrixDestroyed ? 'destroyed' : ''}`} // Add destroyed class for animation
-          style={{
-            left: `${i * 3.5}%`,
-            '--delay': Math.random(),
-          } as React.CSSProperties}
-        >
-          {randomLetters.split('').map((char, index) => (
-            <span key={index}>{char}</span>
-          ))}
-        </div>
-      );
-    }
-    return columns;
-  };
-
   // Function to handle "Enter" button click and navigate
   const handleEnterClick = () => {
     setMatrixDestroyed(true); // Trigger matrix destruction effect
@@ -59,7 +63,7 @@ export const Home: React.FC = () => {
   return (
     <main className="homePage">
       {/* Falling Matrix Letters */}
-      <div className="matrixRain">{createMatrixColumns()}</div>
+      <MatrixRain matrixDestroyed={matrixDestroyed} />
 
       {/* Text Content with Typing Effect */}
       <div className="welcomeText">

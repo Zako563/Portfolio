@@ -10,84 +10,91 @@
     height: 100vh; /* Full viewport height */
     position: relative; /* Relative for the falling text effect */
     overflow: hidden; /* Hide overflow */
-  }
-  
-  /* Falling Letters Effect */
-  @keyframes matrixRain {
+}
+
+/* Falling Binary Matrix Effect */
+@keyframes matrixRain {
     0% {
-      transform: translateY(-100%);
+        transform: translateY(-100%); /* Start above the viewport */
+        color: white; /* Start as white */
+        opacity: 0; /* Initially invisible */
+    }
+    50% {
+        color: rgba(0, 255, 0, 0.7); /* Mid-fall, transition to green */
+        opacity: 1; /* Fully visible in the middle */
     }
     100% {
-      transform: translateY(100%);
+        transform: translateY(100%); /* Fall down to the bottom */
+        color: rgba(0, 255, 0, 0.7); /* Stay neon green */
+        opacity: 0.1; /* Fade out towards the bottom */
     }
-  }
-  
-  .matrixRain {
+}
+
+.matrixRain {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     overflow: hidden;
-  }
-  
-  .matrixColumn {
+}
+
+.matrixColumn {
     position: absolute;
     top: -200px; /* Start above the viewport */
     width: 10px; /* Thin columns */
     font-size: 1rem; /* Letter size */
-    color: rgba(0, 255, 0, 0.7); /* Slightly transparent neon green */
     animation: matrixRain linear infinite;
     animation-duration: 4s; /* Adjust for speed */
     animation-delay: calc(-5s * var(--delay)); /* Staggered start */
-  }
-  
-  .matrixColumn span {
+}
+
+.matrixColumn span {
     display: block;
     opacity: 0.1; /* Fade effect */
     animation: fadeIn 0.1s linear infinite;
     animation-delay: calc(0.1s * var(--delay));
-  }
-  
-  @keyframes fadeIn {
+}
+
+@keyframes fadeIn {
     0% {
-      opacity: 0.1;
+        opacity: 0.1;
     }
     50% {
-      opacity: 0.9;
+        opacity: 1;
     }
     100% {
-      opacity: 0.1;
+        opacity: 0.1;
     }
-  }
-  
-  /* Text Content */
-  .welcomeText {
+}
+
+/* Text Content */
+.welcomeText {
     z-index: 2; /* Above the falling text */
     text-align: center;
-  }
-  
-  h4 {
+}
+
+h4 {
     font-size: 1.5rem;
     margin-bottom: 10px;
     color: #00ff00;
-  }
-  
-  h1 {
+}
+
+h1 {
     font-size: 4rem;
     line-height: 1.2;
     margin-bottom: 20px;
     color: #00ff00;
-  }
-  
-  .paragraph {
+}
+
+.paragraph {
     font-size: 1.2rem;
     max-width: 400px;
     line-height: 1.6;
     color: rgba(0, 255, 0, 0.9);
-  }
-  
-  .welcomeText .button {
+}
+
+.welcomeText .button {
     background: none; /* No background color */
     border: 2px solid #00ff00; /* Neon green border */
     color: #00ff00; /* Neon green text */
@@ -102,9 +109,9 @@
     overflow: hidden;
     transition: all 0.3s ease-in-out;
     z-index: 10; /* Ensure it's above the matrix effect */
-  }
-  
-  .welcomeText .button::before {
+}
+
+.welcomeText .button::before {
     content: '';
     position: absolute;
     top: 0;
@@ -116,29 +123,27 @@
     transform-origin: 100%;
     animation: matrixButtonAnimation 1s forwards;
     z-index: -1; /* Behind the button text */
-  }
-  
-  .welcomeText .button:hover {
+}
+
+.welcomeText .button:hover {
     background: #00ff00;
     color: black;
     transform: scale(1.05);
-  }
-  
-  @keyframes matrixButtonAnimation {
+}
+
+@keyframes matrixButtonAnimation {
     to {
-      transform: scaleX(1);
+        transform: scaleX(1);
     }
-  }
-  
-  /* Optional - Add a glowing effect on hover */
-  .welcomeText .button:hover {
+}
+
+/* Optional - Add a glowing effect on hover */
+.welcomeText .button:hover {
     box-shadow: 0 0 15px rgba(0, 255, 0, 0.7);
     text-shadow: 0 0 10px rgba(0, 255, 0, 0.7);
-  }
-  
+}
 
-
-  /* Typing Effect */
+/* Typing Effect */
 .typing {
     display: inline-block;
     white-space: nowrap; /* Prevent text wrapping */
@@ -146,50 +151,19 @@
     font-size: 2rem; /* Adjust the size of the typing effect */
     border-right: 2px solid #00ff00; /* Blinking cursor */
     animation: typing 4s steps(20, end), blink 0.5s step-end infinite;
-  }
-  
-  @keyframes typing {
+}
+
+@keyframes typing {
     from {
-      width: 0; /* Start with no text visible */
+        width: 0; /* Start with no text visible */
     }
     to {
-      width: 100%; /* Fully display text */
+        width: 100%; /* Fully display text */
     }
-  }
-  
-  @keyframes blink {
+}
+
+@keyframes blink {
     50% {
-      border-color: transparent; /* Blink cursor */
+        border-color: transparent; /* Blink cursor */
     }
-  }
-
-
-  
-
-
-
-  /* Fragmentation Effect */
-@keyframes fragmentMatrix {
-    0% {
-      opacity: 1;
-      transform: scale(1);
-    }
-    50% {
-      opacity: 0.5;
-      transform: translateY(-20px) rotate(10deg);
-    }
-    100% {
-      opacity: 0;
-      transform: translateY(100vh) rotate(360deg);
-    }
-  }
-  
-  .matrixColumn {
-    /* Initial state - no fragmentation effect applied */
-    transition: transform 2s ease-in-out, opacity 2s ease-in-out;
-  }
-  
-  .matrixColumn.fragmented {
-    animation: fragmentMatrix 2s forwards;
-  }
-  
+}
