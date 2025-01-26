@@ -4,6 +4,11 @@ package com.example.portfolio.utils;
 import com.example.portfolio.MyselfSubdomain.DataLayer.Zako;
 import com.example.portfolio.MyselfSubdomain.PresentationLayer.ZakoRequestModel;
 import com.example.portfolio.MyselfSubdomain.PresentationLayer.ZakoResponseModel;
+import com.example.portfolio.ProjectSubdomain.DataLayer.Project;
+import com.example.portfolio.ProjectSubdomain.PresentationLayer.ProjectRequestModel;
+import com.example.portfolio.ProjectSubdomain.PresentationLayer.ProjectResponseModel;
+import com.example.portfolio.SkillsSubdomain.DataLayer.Skill;
+import com.example.portfolio.SkillsSubdomain.PresentationLayer.SkillResponseModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
@@ -21,6 +26,31 @@ public class EntityDTOUtil {
         BeanUtils.copyProperties(zako, zakoResponseModel);
         return zakoResponseModel;
     }
+
+
+    public static SkillResponseModel toSkillResponseModel(Skill skill) {
+        SkillResponseModel skillResponseModel  = new SkillResponseModel();
+        BeanUtils.copyProperties(skill, skillResponseModel);
+        return skillResponseModel;
+    }
+
+    public static ProjectResponseModel toProjectResponseModel(Project project) {
+        ProjectResponseModel projectResponseModel  = new ProjectResponseModel();
+        BeanUtils.copyProperties(project, projectResponseModel);
+        return projectResponseModel;
+    }
+
+
+    public static Project toProjectEntity(ProjectRequestModel projectRequestModel){
+        return Project.builder()
+                .projectId(generateOrderIdString())
+                .projectName(projectRequestModel.getProjectName())
+                .description(projectRequestModel.getDescription())
+                .imageUrl(projectRequestModel.getImageUrl())
+                .skills(projectRequestModel.getSkills())
+                .build();
+    }
+
 
     public static String generateOrderIdString() {
         return UUID.randomUUID().toString();

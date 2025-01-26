@@ -12,4 +12,6 @@ import lombok.NoArgsConstructor;
 public class ZakoRequestModel {
      int age;
      String nationality;
+     String name;
+     String interest;
 }

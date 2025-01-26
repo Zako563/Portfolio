@@ -13,4 +13,6 @@ public class ZakoResponseModel {
     String zakoId;
     int age;
     String nationality;
+    String name;
+    String interest;
 }

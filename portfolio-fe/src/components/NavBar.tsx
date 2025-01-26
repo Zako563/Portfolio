@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom';
 const navigationItems = [
   { label: 'Home', path: PathRoutes.HomePage },
   { label: 'Account', path: '/zako' },
+  { label: 'Projects', path: '/project' },
 ];
 
 export const NavBar: React.FC = () => {

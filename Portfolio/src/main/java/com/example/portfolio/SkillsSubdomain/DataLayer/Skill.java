@@ -1,4 +1,4 @@
-package com.example.portfolio.MyselfSubdomain.DataLayer;
+package com.example.portfolio.SkillsSubdomain.DataLayer;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,13 +10,11 @@ import org.springframework.data.annotation.Id;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Zako {
-
+public class Skill {
     @Id
     private String id;
-    private String zakoId;
-    private String name;
-    private String interest;
-    private int age;
-    private String nationality;
+    private String skillId;
+    private String skillName;
+    private String skillLogo;
+
 }
