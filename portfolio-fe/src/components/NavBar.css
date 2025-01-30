@@ -1,0 +1,63 @@
+/* NavBar.css */
+.navbar {
+    position: fixed; /* Fix the navbar at the top */
+    top: 0;
+    left: 50%; /* Center the navbar horizontally */
+    transform: translateX(-50%); /* Adjust for exact centering */
+    width: auto; /* Do not take full width */
+    max-width: 800px; /* Optional: Set a max width for the navbar */
+    padding: 10px 20px; /* Add some padding */
+    background: linear-gradient(135deg, #04071D, #0C0E23); /* Gradient background */
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Add a subtle shadow */
+    z-index: 1000; /* Ensure it stays on top of other content */
+    margin-top: 2%;
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: center; /* Center the navigation items */
+    align-items: center;
+    gap: 20px; /* Space between navigation items */
+}
+
+.navbar-container a {
+    color: #fff; /* White text color */
+    text-decoration: none; /* Remove underline */
+    font-size: 16px;
+    font-weight: 500;
+    padding: 8px 12px; /* Add padding for clickable area */
+    border-radius: 5px; /* Rounded corners for links */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth hover effect */
+}
+
+.navbar-container a:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Light background on hover */
+    color: #fff;
+}
+
+.navbar-container a.active {
+    background-color: rgba(255, 255, 255, 0.2); /* Slightly darker background for active link */
+    color: #fff;
+}
+
+.navbar-container button {
+    background-color: #4A90E2; /* Blue button background */
+    color: #fff; /* White text color */
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px; /* Rounded corners */
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+.navbar-container button:hover {
+    background-color: #357ABD; /* Darker blue on hover */
+}
+
+.navbar-container button:disabled {
+    background-color: #ccc; /* Grayed out when disabled */
+    cursor: not-allowed;
+}

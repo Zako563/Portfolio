@@ -4,5 +4,5 @@ export enum PathRoutes {
   ZakoPage = '/zako',
   ProjectPage= '/project',
   AddProjectPage= '/addProject',
-  UpdateProjectPage= '/updateProject/:projectId'
+  UpdateProjectPage= '/updateProject/:projectId',
 }

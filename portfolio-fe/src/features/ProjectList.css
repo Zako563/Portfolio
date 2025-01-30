@@ -1,104 +1,156 @@
-.project-section {
-    padding: 20px;
-  }
-  
-  .page-title {
+.page-title {
     text-align: center;
-    margin-bottom: 30px;
-    font-size: 2rem;
+    margin-bottom: 50px;
+    font-size: 3rem;
     font-weight: bold;
-  }
-  
-  .project-card {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background: #CBACF9; /* Gradient text */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.project-card {
     cursor: pointer;
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
     overflow: hidden;
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-    background: linear-gradient(135deg, #4c1a8f, #5e2c8d); /* Metallic Dark Purple */
+    transition: transform 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
+    background: linear-gradient(135deg, #04071D, #0C0E23); /* Darker Purple */
     position: relative;
-  }
-  
-  .project-card:hover {
-    transform: scale(0.95); /* Slightly smaller to simulate falling behind */
-    z-index: -1; /* Ensure it falls behind */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Less intense shadow to emphasize depth */
-  }
-  
-  .project-card:not(:hover) {
-    z-index: 1; /* Default stacking context */
-  }
-  
-  .project-card:hover {
-    transform: scale(1.05);
-  }
-  
-  .card-img-wrapper {
-    height: 200px;
+    width: 100%;
+    height: 96%;
+    padding: 20px;
+    margin-bottom: 30px;
+    transform-style: preserve-3d; /* Enable 3D transformations */
+}
+
+.project-card:hover {
+    transform: rotateX(10deg) rotateY(-10deg) scale(1.05); /* Tilt and scale on hover */
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+}
+
+.card-img-wrapper {
+    height: 250px;
     overflow: hidden;
-  }
-  
-  .project-image {
+    border-radius: 15px;
+    position: relative;
+    transform-style: preserve-3d; /* Ensure child elements respect 3D transformations */
+}
+
+.project-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
-  }
-  
-  .card-body {
+    transition: transform 0.5s ease-in-out;
+}
+
+.project-card:hover .project-image {
+    transform: scale(1.1) translateZ(20px); /* Add depth to the image */
+}
+
+.card-body {
     text-align: center;
-    padding: 15px;
-  }
-  
-  .project-name {
-    font-size: 1.5rem;
+    padding: 20px;
+    transform-style: preserve-3d; /* Ensure text respects 3D transformations */
+}
+
+.project-name {
+    font-size: 2rem;
     font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
-  .project-description {
-    font-size: 1rem;
-    color: #ddd; /* Slightly lighter color for contrast */
-  }
-  
-  .card-footer {
-    background: #f8f9fa;
-    padding: 10px;
-    position: relative;
-  }
-  
-  .skill-carousel {
+    margin-bottom: 15px;
+    color: #d8d8d7; /* Yellow for contrast */
+    transform: translateZ(30px); /* Bring text forward */
+}
+
+.project-description {
+    font-size: 1.1rem;
+    color: #5b5858;
+    line-height: 1.6;
+    transform: translateZ(20px); /* Add depth to the description */
+}
+
+.card-footer {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 20px;
+    transform-style: preserve-3d; /* Ensure footer respects 3D transformations */
+}
+
+.skill-carousel {
     display: flex;
-    gap: 10px;
-    overflow: hidden; /* Prevent logos from overflowing */
+    gap: 1px;
+    overflow: hidden;
     position: relative;
-  }
-  
-  .skill-logos {
+    transform-style: preserve-3d; /* Ensure carousel respects 3D transformations */
+}
+
+.skill-logos {
     display: flex;
-    gap: 10px;
-    animation: scrollSkills 5s linear infinite; /* Faster speed */
-  }
-  
-  .skill-logo {
-    width: 40px;
-    height: 40px;
+    gap: 15px;
+    animation: scrollSkills 8s linear infinite;
+}
+
+.skill-logo {
+    width: 50px;
+    height: 50px;
     object-fit: contain;
     border-radius: 50%;
-    transition: transform 0.2s ease, box-shadow 0.3s ease;
-    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.2); /* Floating effect */
-  }
-  
-  .skill-logo:hover {
-    transform: scale(1.2);
-    box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.3); /* More intense shadow on hover */
-  }
-  
-  @keyframes scrollSkills {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.3);
+    transform: translateZ(10px); /* Add depth to logos */
+}
+
+.skill-logo:hover {
+    transform: scale(1.3) translateZ(20px); /* Enhance depth on hover */
+    box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes scrollSkills {
     0% {
-      transform: translateX(200%); /* Start from the right */
+        transform: translateX(100%);
     }
     100% {
-      transform: translateX(-100%); /* Move to the left */
+        transform: translateX(-100%);
     }
-  }
-  
+}
+
+/* Additional Creative Elements */
+
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    transform: translateZ(-10px); /* Push the overlay back */
+}
+
+.project-card:hover::before {
+    opacity: 1;
+}
+
+.project-card::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%) translateZ(-20px); /* Add depth to the shadow */
+    width: 80%;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    filter: blur(10px);
+    transition: all 0.5s ease-in-out;
+}
+
+.project-card:hover::after {
+    bottom: -20px;
+    width: 90%;
+    filter: blur(15px);
+}

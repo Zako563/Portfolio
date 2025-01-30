@@ -47,7 +47,7 @@ const AddProjectForm: React.FC = (): JSX.Element => {
     try {
       await addProject(newProject);
       alert('Project added successfully!');
-      navigate('/project');
+      navigate('/zako');
     } catch (error) {
       console.error('Error adding project:', error);
       alert('Failed to add project.');

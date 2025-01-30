@@ -28,6 +28,8 @@ const router = createBrowserRouter([
     path: PathRoutes.UpdateProjectPage,
     element: <UpdateProjectPage />,
   },
+
+
 ]);
 
 export default router;

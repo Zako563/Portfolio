@@ -1,0 +1,52 @@
+/* Footer.css */
+.footer {
+    color: #EDE8E0; /* Matches the text color of the theme */
+    padding: 1.5rem 2rem; /* Add horizontal padding */
+    text-align: left; /* Align text to the left */
+    margin-top: 2rem;
+    height: 50px;
+    display: flex; /* Use flexbox for layout */
+    justify-content: space-between; /* Space between text and icons */
+    align-items: center; /* Vertically center content */
+    background: linear-gradient(135deg, #1A0D2E, #0A0415); /* Match the page background */
+}
+
+.footer-content {
+    max-width: 100%; /* Allow full width for flex layout */
+    margin: 0;
+    display: flex;
+    justify-content: space-between; /* Space between text and icons */
+    align-items: center; /* Vertically center content */
+    width: 100%; /* Take up full width */
+}
+
+.footer-text {
+    font-size: 1rem;
+    margin-bottom: 0; /* Remove margin to align properly */
+}
+
+.footer-socials {
+    display: flex;
+    gap: 1.5rem; /* Space between icons */
+    align-items: center; /* Vertically center icons */
+}
+
+.footer-socials a {
+    color: #EDE8E0;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+    display: flex;
+    flex-direction: column; /* Stack text and icon vertically */
+    align-items: center; /* Center align items */
+}
+
+.footer-socials a:hover {
+    color: #007acc; /* Matches the highlight color in the theme */
+}
+
+.social-image {
+    width: 24px; /* Adjust icon size */
+    height: 24px;
+    margin-top: 0.5rem; /* Space between text and icon */
+}

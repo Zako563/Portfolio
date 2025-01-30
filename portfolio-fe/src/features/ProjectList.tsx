@@ -43,7 +43,7 @@ const ProjectList: React.FC = (): JSX.Element => {
   }
 
   return (
-    <div className="project-section">
+    <div>
       <div className="d-flex justify-content-between align-items-center mb-4">
         <h2 className="page-title">Projects</h2>
         <button className="btn btn-primary" onClick={handleAddProject}>

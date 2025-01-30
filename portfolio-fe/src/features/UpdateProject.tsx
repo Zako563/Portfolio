@@ -64,7 +64,7 @@ const UpdateProjectForm: React.FC = (): JSX.Element => {
     try {
       await updateProject(projectId, updatedProject);
       alert('Project updated successfully!');
-      navigate('/project');
+      navigate('/zako');
     } catch (error) {
       console.error('Error updating project:', error);
       alert('Failed to update project.');

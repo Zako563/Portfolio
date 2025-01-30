@@ -33,35 +33,45 @@ public class DataSetupServiceReview implements CommandLineRunner {
     }
 
     private void setupZako() {
-        Zako zako1 = buildZako("zakoId1", "Zakaria Mohamed Boudboub", "I’ve always been a huge " +
-                "fan of football, and Real Madrid holds a special place in my heart as my favorite team." +
-                " The passion, strategy, and excitement of the game always draw me in. Outside of football," +
-                " I have a deep love for math—it’s fascinating to explore its patterns and problem-solving nature." +
-                " Coding is another big interest of mine, where I get to merge logic with creativity to build new " +
-                "things. Along with these, I enjoy staying active through sports, constantly challenging myself and " +
-                "pushing my limits. Whether it's learning something new or engaging in a good game, I thrive on both" +
-                " mental and physical challenges.", 19, "Algerian");
+        Zako zako1 = buildZako(
+                "zakoId1",
+                "Zakaria Mohamed Boudboub",
+                "Aspiring Software Engineer",
+                "I’m currently in my third year of Computer Science at Champlain College, " +
+                        "diving deep into the world of coding and technology. Every day, I find myself " +
+                        "amazed at how coding can transform ideas into reality, whether it’s building " +
+                        "something from scratch or optimizing a process. I’m always seeking new challenges to" +
+                        " sharpen my skills, whether it’s through Java, Spring Boot, or exploring new frameworks." +
+                        " Outside of school, I love experimenting with projects, learning new languages, and " +
+                        "finding creative solutions to problems. For me, coding isn’t just about writing lines of" +
+                        " code—it’s about crafting something meaningful that makes a difference.",
+                List.of("https://www.citypng.com/public/uploads/preview/free-united-kingdom-england-uk-flag-icon-png-735811697023915sbq5vwe1oa.png", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrQCi5AVhYAaRwA0SwVQ9iebXjvSNUSFzq5A&s", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSorBlfXwQTkTbhyrQ2rIjW8jhe4lcDG6Ci6Q&s", "https://www.citypng.com/public/uploads/preview/hd-spanish-spain-flag-icon-transparent-png-735811695829736thez4vs8bh.png")
+        );
 
         Flux.just(zako1)
-                .flatMap(zako -> {
-                    return zakoRepo.findZakoByZakoId(zako.getZakoId())
-                            .doOnTerminate(() -> System.out.println("Terminated: " + zako.getZakoId()))
-                            .switchIfEmpty(Mono.defer(() -> {
-                                System.out.println("Inserting review: " + zako.getZakoId());
-                                return zakoRepo.save(zako); // Save if review doesn't exist
-                            }));
-                })
+                .flatMap(zako -> zakoRepo.findZakoByZakoId(zako.getZakoId())
+                        .flatMap(existingZako -> {
+                            // If exists, update it with new fields
+                            existingZako.setTitle(zako.getTitle());
+                            existingZako.setSummary(zako.getSummary());
+                            existingZako.setLanguages(zako.getLanguages());
+                            return zakoRepo.save(existingZako);
+                        })
+                        .switchIfEmpty(Mono.defer(() -> {
+                            System.out.println("Inserting Zako profile: " + zako.getZakoId());
+                            return zakoRepo.save(zako); // Save if not found
+                        }))
+                )
                 .subscribe();
     }
 
-
-    private Zako buildZako(String zakoId, String name, String interest, int age, String nationality) {
+    private Zako buildZako(String zakoId, String name, String title, String summary, List<String> languages) {
         return Zako.builder()
                 .zakoId(zakoId)
                 .name(name)
-                .interest(interest)
-                .age(age)
-                .nationality(nationality)
+                .title(title)
+                .summary(summary)
+                .languages(languages)
                 .build();
     }
 
