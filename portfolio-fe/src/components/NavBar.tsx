@@ -14,12 +14,12 @@ export const NavBar: React.FC = () => {
 
   const handleLoginRedirect = () => {
     setLoading(true);
-    const audience = 'https://dev-5kbvxb8zgblo1by3.us.auth0.com/api/v2/';
+    const audience = 'https://dev-gvcipzccm8rh8aqe.us.auth0.com/api/v2/';
     const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
     const redirectUri = process.env.REACT_APP_AUTH0_CALLBACK_URL;
 
     window.location.href =
-      `https://dev-5kbvxb8zgblo1by3.us.auth0.com/authorize?` +
+      `https://dev-gvcipzccm8rh8aqe.us.auth0.com/authorize?` +
       `response_type=token&` +
       `client_id=${clientId}&` +
       `redirect_uri=${redirectUri}&` +

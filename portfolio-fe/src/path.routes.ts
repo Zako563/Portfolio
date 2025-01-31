@@ -5,4 +5,6 @@ export enum PathRoutes {
   ProjectPage= '/project',
   AddProjectPage= '/addProject',
   UpdateProjectPage= '/updateProject/:projectId',
+  Callback = '/callback',
+  Profile = '/profile',
 }

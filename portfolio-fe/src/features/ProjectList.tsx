@@ -8,10 +8,31 @@ import './ProjectList.css';
 
 const ProjectList: React.FC = (): JSX.Element => {
   const [projects, setProjects] = useState<projectResponseModel[]>([]);
+  const [isZako, setIsZako] = useState<boolean>(false); // State to check if the user has the "Zako" role
   const [loading, setLoading] = useState<boolean>(true);
   const navigate = useNavigate();
 
   useEffect(() => {
+    const fetchUserRoles = async () => {
+      const accessToken = localStorage.getItem('access_token');
+      if (!accessToken) {
+        console.error('No access token found');
+        setIsZako(false);
+        return;
+      }
+
+      try {
+        const base64Url = accessToken.split('.')[1];
+        const decodedPayload = JSON.parse(atob(base64Url));
+        const roles = decodedPayload['https://portfolio/roles'] || []; // Replace with your namespace
+
+        setIsZako(roles.includes('Zako')); // Check if the user has the "Zako" role
+      } catch (err) {
+        console.error('Error decoding user roles:', err);
+        setIsZako(false);
+      }
+    };
+
     const fetchProjectData = async (): Promise<void> => {
       try {
         setLoading(true);
@@ -28,7 +49,8 @@ const ProjectList: React.FC = (): JSX.Element => {
       }
     };
 
-    fetchProjectData();
+    fetchUserRoles(); // Fetch and check user roles
+    fetchProjectData(); // Fetch project data
   }, []);
 
   const handleAddProject = (): void => {
@@ -47,26 +69,30 @@ const ProjectList: React.FC = (): JSX.Element => {
     <div>
       <div className="d-flex justify-content-between align-items-center mb-4">
         <h2 className="page-title">Projects</h2>
-        <button className="btn btn-primary" onClick={handleAddProject}>
-          Add
-        </button>
+        {/* Show the "Add" button only if the user has the "Zako" role */}
+        {isZako && (
+          <button className="btn btn-primary" onClick={handleAddProject}>
+            Add
+          </button>
+        )}
       </div>
       <div className="row">
         {projects.length > 0 ? (
           projects.map((project) => (
             <div className="col-md-6 mb-4" key={project.projectId}>
-              {/* Update Button Outside the Card */}
-              <div className="d-flex justify-content-end mb-2">
-                <button
-                  className="btn btn-secondary btn-sm"
-                  onClick={() => handleUpdateProject(project.projectId)}
-                >
-                  Update
-                </button>
-              </div>
-              {/* Card Content */}
+              {/* Show the "Update" button only if the user has the "Zako" role */}
+              {isZako && (
+                <div className="d-flex justify-content-end mb-2">
+                  <button
+                    className="btn btn-secondary btn-sm"
+                    onClick={() => handleUpdateProject(project.projectId)}
+                  >
+                    Update
+                  </button>
+                </div>
+              )}
               <div className="card project-card">
-              <div className="card-img-wrapper">
+                <div className="card-img-wrapper">
                   <a 
                     href={
                       project.projectName === "NoodleStar" 
@@ -88,8 +114,7 @@ const ProjectList: React.FC = (): JSX.Element => {
                       className="card-img-top project-image"
                     />
                   </a>
-            </div>
-
+                </div>
                 <div className="card-body">
                   <h5 className="card-title project-name">{project.projectName}</h5>
                   <p className="card-text project-description">{project.description}</p>

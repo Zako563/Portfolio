@@ -9,6 +9,8 @@ import com.example.portfolio.ProjectSubdomain.PresentationLayer.ProjectRequestMo
 import com.example.portfolio.ProjectSubdomain.PresentationLayer.ProjectResponseModel;
 import com.example.portfolio.SkillsSubdomain.DataLayer.Skill;
 import com.example.portfolio.SkillsSubdomain.PresentationLayer.SkillResponseModel;
+import com.example.portfolio.UserSubdomain.DataLayer.User;
+import com.example.portfolio.UserSubdomain.PresentationLayer.UserResponseModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
@@ -49,6 +51,20 @@ public class EntityDTOUtil {
                 .imageUrl(projectRequestModel.getImageUrl())
                 .skills(projectRequestModel.getSkills())
                 .build();
+    }
+
+
+
+
+    public static UserResponseModel toUserResponseModel(User user) {
+        UserResponseModel model = new UserResponseModel();
+        model.setUserId(user.getUserId());
+        model.setEmail(user.getEmail());
+        model.setFirstName(user.getFirstName());
+        model.setLastName(user.getLastName());
+        model.setRoles(user.getRoles());
+        model.setPermissions(user.getPermissions());
+        return model;
     }
 
 
