@@ -49,9 +49,16 @@ body {
 
 .hero-image-full {
   width: 100%; /* Adjusted to percentage */
-  height: auto;
+  height: -10%;
   margin-right: 5%;
+  background: linear-gradient(135deg, #04071D, #0C0E23) ; /* Blue background */
+  padding: 10px; /* Space around the image */
+  border-radius: 8%; /* Circular shape */
+  display: inline-block;
+  max-height:500px; 
 }
+
+
 
 .hero-text {
   flex: 1;
@@ -130,6 +137,7 @@ body {
   margin-top: 5%;
   text-align: center;
   color: #CBACF9;
+  background-color: linear-gradient(135deg, #04071D, #111434);
   
 }
 

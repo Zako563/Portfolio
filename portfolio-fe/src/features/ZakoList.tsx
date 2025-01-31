@@ -57,7 +57,7 @@ const ZakoList: React.FC = (): JSX.Element => {
           {/* Image on the left */}
           <div className="hero-image">
             <img
-              src="https://i.postimg.cc/yYfdWy7w/1738278650630-removebg-preview.png"
+              src="https://i.postimg.cc/s1Fqn8zM/aifaceswap-3f6e8e1c5ccabb53df85850a21c486da-1.jpg"
               alt="Profile"
               className="hero-image-full"
             />
