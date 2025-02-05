@@ -4,9 +4,11 @@ import { NavBar } from '../components/NavBar';
 import ProjectList from '../features/ProjectList';
 import './Shared.css';
 import Footer from '../components/Footer';
+import { useGiscus } from './useGiscus';
 
 export default function ZakoPage(): JSX.Element {
   const [isScrolled, setIsScrolled] = useState(false);
+  useGiscus();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -33,8 +35,14 @@ export default function ZakoPage(): JSX.Element {
         <NavBar />
       </div>
       <div className={`shared-background ${isScrolled ? 'fade-out' : ''}`}>
+      <div className="illuminated-square"></div>
+    <div className="illuminated-square"></div>
+    <div className="illuminated-square"></div>
+    <div className="illuminated-square"></div>
+    <div className="illuminated-square"></div>
         <ZakoList />
         <ProjectList />
+        <div id="giscus" style={{ marginTop: '2rem' }} />
         <Footer />
       </div>
     </>

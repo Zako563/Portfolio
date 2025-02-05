@@ -35,6 +35,7 @@ auth0:
   clientSecret: ${AUTH0_CLIENT_SECRET}
   audience: https://dev-gvcipzccm8rh8aqe.us.auth0.com/api/v2/
 
+
 ---
 spring:
   config:

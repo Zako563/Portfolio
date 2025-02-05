@@ -34,8 +34,11 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeExchange(authz -> {
                     log.info("Configuring endpoint permissions...");
-                    authz.matchers(ServerWebExchangeMatchers
-                            .pathMatchers("/api/v1/users/**")).authenticated()
+                    // Allow unauthenticated access to these endpoints
+                    authz.matchers(ServerWebExchangeMatchers.pathMatchers("localhost:8080/api/v1/zako/**")).permitAll()
+                            // Require authentication for the users endpoint
+                            .matchers(ServerWebExchangeMatchers.pathMatchers("/api/v1/users/**")).authenticated()
+                            // Any other endpoint will be public
                             .anyExchange().permitAll();
                     log.info("Finished configuring endpoint permissions.");
                 })
@@ -59,6 +62,7 @@ public class SecurityConfig {
                 })
                 .build();
     }
+
 
     private ReactiveJwtAuthenticationConverter makePermissionsConverter() {
         log.info("Creating JWT Authentication Converter...");
@@ -90,6 +94,7 @@ public class SecurityConfig {
         corsConfig.addAllowedHeader("*");
         corsConfig.addAllowedMethod("*");
         corsConfig.setAllowCredentials(true);
+
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", corsConfig);
