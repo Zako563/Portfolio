@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [
     react(),
     federation({
-      name: 'noodlestar-frontend',
+      name: 'portfolio-frontend',
       shared: ['react', 'react-dom'],
     }),
   ],
