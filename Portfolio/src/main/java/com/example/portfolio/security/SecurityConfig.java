@@ -91,7 +91,7 @@ public class SecurityConfig {
         CorsConfiguration corsConfig = new CorsConfiguration();
         corsConfig.addAllowedOrigin("http://localhost:3000");
         corsConfig.addAllowedOrigin("https://dev-gvcipzccm8rh8aqe.us.auth0.com/");
-        corsConfig.addAllowedOrigin("https://octopus-app-ghqrh.ondigitalocean.app/callback/");
+        corsConfig.addAllowedOrigin("https://zakoportfoliopage-kkpoz.ondigitalocean.app/");
         corsConfig.addAllowedHeader("*");
         corsConfig.addAllowedMethod("*");
         corsConfig.setAllowCredentials(true);

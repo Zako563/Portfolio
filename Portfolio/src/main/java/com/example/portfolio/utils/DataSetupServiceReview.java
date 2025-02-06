@@ -32,7 +32,7 @@ public class DataSetupServiceReview implements CommandLineRunner {
     public void run(String... args) throws Exception {
     setupZako();
     setupProjects();
-    setupSkills();
+   //setupSkills();
     setupUsers();
     }
 

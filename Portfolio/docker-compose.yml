@@ -9,6 +9,8 @@ services:
       - SPRING_PROFILES_ACTIVE=docker
       - AUTH0_CLIENT_ID=QQ6zW8GxFxoJrH2dO2Sk7qWnFdEeVnqM
       - AUTH0_CLIENT_SECRET=OCebAFYMYDHiZ3jLkv2GIiePcY0dQvKDQzwg9mxOwbOVIDrtaXf_jnRBlDsToVWB
+      - SPRING_DATA_MONGODB_URI=mongodb+srv://doadmin:57JI193Mqwro84s0@db-mongodb-nyc3-57009-a55c7e87.mongo.ondigitalocean.com/admin?retryWrites=true&w=majority
+      - SPRING_PROFILES_ACTIVE=prod
     depends_on:
       - mongodb
 
