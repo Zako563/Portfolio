@@ -12,18 +12,18 @@ services:
     depends_on:
       - mongodb
 
-#  portfolioFrontend:
-#    image: portfolio-fe
-#    container_name: portfolio-fe
-#    build:
-#      context: ../portfolio-fe
-#      dockerfile: Dockerfile
-#      args:
-#        - BUILD_MODE=development
-#    ports:
-#      - "3000:3000"
-#    volumes:
-#      - ../portfolio-fe/src:/app/src
+  portfolioFrontend:
+    image: portfolio-fe
+    container_name: portfolio-fe
+    build:
+      context: ../portfolio-fe
+      dockerfile: Dockerfile
+      args:
+        - BUILD_MODE=development
+    ports:
+      - "3000:3000"
+    volumes:
+      - ../portfolio-fe/src:/app/src
 
 
   mongodb:
