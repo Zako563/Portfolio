@@ -10,31 +10,27 @@ export default function ZakoPage(): JSX.Element {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Check the scroll position
-      if (window.scrollY > 700) { // Adjust this value as needed
+      if (window.scrollY > 700) {
         setIsScrolled(true);
       } else {
         setIsScrolled(false);
       }
     };
 
-    // Add scroll event listener
     window.addEventListener('scroll', handleScroll);
 
-    // Cleanup the event listener
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
-  // Load Commento script
+  // Load Hyvor Talk script
   useEffect(() => {
     const script = document.createElement('script');
-    script.src = 'https://cdn.commento.io/js/commento.js';
+    script.src = 'https://talk.hyvor.com/embed.js'; // Hyvor Talk script
     script.defer = true;
     document.body.appendChild(script);
 
-    // Cleanup the script on component unmount
     return () => {
       document.body.removeChild(script);
     };
@@ -53,8 +49,10 @@ export default function ZakoPage(): JSX.Element {
         <div className="illuminated-square"></div>
         <ZakoList />
         <ProjectList />
-        {/* Replace Giscus with Commento */}
-        <div id="commento" style={{ marginTop: '2rem' }} />
+        
+        {/* Hyvor Talk Comment Section */}
+        <div id="hyvor-talk-view" data-website-id="12537" style={{ marginTop: '2rem' }}></div>
+
         <Footer />
       </div>
     </>
