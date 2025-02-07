@@ -5,30 +5,33 @@ import ProjectList from '../features/ProjectList';
 import './Shared.css';
 import Footer from '../components/Footer';
 
+// Declare HyvorTalk as a valid JSX element
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      'hyvor-talk-comments': any;
+    }
+  }
+}
+
 export default function ZakoPage(): JSX.Element {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 700) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 700);
     };
 
     window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Load Hyvor Talk script
+  // Load Hyvor Talk script dynamically
   useEffect(() => {
     const script = document.createElement('script');
-    script.src = 'https://talk.hyvor.com/embed.js'; // Hyvor Talk script
-    script.defer = true;
+    script.src = 'https://talk.hyvor.com/embed/embed.js';
+    script.async = true;
+    script.type = 'module';
     document.body.appendChild(script);
 
     return () => {
@@ -49,9 +52,13 @@ export default function ZakoPage(): JSX.Element {
         <div className="illuminated-square"></div>
         <ZakoList />
         <ProjectList />
-        
+
         {/* Hyvor Talk Comment Section */}
-        <div id="hyvor-talk-view" data-website-id="12537" style={{ marginTop: '2rem' }}></div>
+        <hyvor-talk-comments 
+          website-id="12545"
+          page-id={window.location.pathname} 
+          style={{ marginTop: '2rem' }} 
+        ></hyvor-talk-comments>
 
         <Footer />
       </div>
