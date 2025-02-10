@@ -17,6 +17,22 @@ declare global {
 export default function ZakoPage(): JSX.Element {
   const [isScrolled, setIsScrolled] = useState(false);
 
+    useEffect(() => {
+      let inputSequence = '';
+  
+      const handleKeyPress = (event: KeyboardEvent) => {
+        inputSequence += event.key;
+        if (inputSequence.endsWith('goat')) {
+          window.location.href = 'https://youtu.be/ETQUINmZLUo?si=4OuG3JhsN1s5I92d'; // Redirect to "/hamid"
+          inputSequence = ''; // Reset the sequence after navigation
+        }
+      };
+  
+      window.addEventListener('keydown', handleKeyPress);
+      return () => window.removeEventListener('keydown', handleKeyPress);
+    }, []);
+  
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 700);
