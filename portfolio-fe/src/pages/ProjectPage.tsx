@@ -1,5 +1,5 @@
+import SendEmailForm from '../features/SendEmailFrom';
 import { NavBar } from '../components/NavBar';
-import ProjectList from '../features/ProjectList';
 import { useGiscus } from './useGiscus';
 
 export default function ProjectPage(): JSX.Element {
@@ -8,8 +8,7 @@ export default function ProjectPage(): JSX.Element {
   return (
     <div>
       <NavBar />
-      <ProjectList />
-      <div id="giscus" style={{ marginTop: '2rem' }} />
+      <SendEmailForm/>
     </div>
   );
 }

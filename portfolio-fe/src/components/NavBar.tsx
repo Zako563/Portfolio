@@ -5,8 +5,8 @@ import './NavBar.css'; // Import the CSS file
 
 const navigationItems = [
   { label: 'Home', path: PathRoutes.HomePage },
-  { label: 'Account', path: '/zako' },
-  { label: 'Projects', path: '/project' },
+  { label: 'Zakaria', path: '/zako' },
+  { label: 'Contact', path: '/project' },
 ];
 
 export const NavBar: React.FC = () => {

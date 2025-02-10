@@ -1,0 +1,119 @@
+.send-email-form {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 20px;
+    background: linear-gradient(135deg, #1A0D2E, #0A0415); /* Very dark purple gradient */
+    color: #fff;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-top: 100px;
+  }
+  
+  .send-email-form::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background:
+      linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(0deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 110px 110px; /* Larger squares */
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+  }
+  
+  .send-email-form::after {
+    content: '';
+    position: absolute;
+    width: 400px; /* Larger spotlight */
+    height: 400px; /* Larger spotlight */
+    top: -200px;
+    left: -200px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent 60%);
+    border-radius: 50%;
+    opacity: 0.8;
+    pointer-events: none;
+  }
+  
+  .send-email-form::after:last-child {
+    content: '';
+    position: absolute;
+    width: 400px; /* Larger spotlight */
+    height: 400px; /* Larger spotlight */
+    top: -200px;
+    right: -200px;
+    left: auto;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent 60%);
+    border-radius: 50%;
+    opacity: 0.8;
+    pointer-events: none;
+  }
+  
+  .send-email-form h2 {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    font-family: 'Arial', sans-serif;
+    color: #fff;
+  }
+  
+  .send-email-form .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .send-email-form label {
+    display: block;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+    color: #e0aaff; /* Lighter purple for labels */
+  }
+  
+  .send-email-form input, .send-email-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 2px solid #3e1f70; /* Lighter purple border */
+    border-radius: 4px;
+    background-color: #3e1f70; /* Matching background */
+    color: #fff;
+    font-size: 1rem;
+  }
+  
+  .send-email-form input:focus, .send-email-form textarea:focus {
+    border-color: #ad7be9; /* Bright purple on focus */
+    outline: none;
+  }
+  
+  .send-email-form button {
+    width: 100%;
+    padding: 12px;
+    background-color: #ad7be9; /* Bright purple */
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .send-email-form button:hover {
+    background-color: #9c6fd6; /* Slightly darker purple on hover */
+  }
+  
+  .send-email-form button:active {
+    background-color: #7a54b0; /* Darker purple when pressed */
+  }
+  
+  .send-email-form input, .send-email-form textarea {
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+  }
+  
+  .send-email-form input:focus, .send-email-form textarea:focus {
+    border-color: #e0aaff;
+    background-color: #4a2c78; /* Slightly darker purple background when focused */
+  }
+  
