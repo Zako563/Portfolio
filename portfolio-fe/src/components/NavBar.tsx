@@ -12,6 +12,7 @@ const navigationItems = [
 export const NavBar: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [currentLanguage, setCurrentLanguage] = useState('EN'); // State to track current language
 
   // Check if a token exists in localStorage on component mount
   useEffect(() => {
@@ -54,9 +55,28 @@ export const NavBar: React.FC = () => {
       `returnTo=${encodeURIComponent(returnTo)}`;
   };
 
+
+  const handleLanguageChange = (lang: string) => {
+    const googleTranslateElement = document.querySelector(
+      '.goog-te-combo'
+    ) as HTMLSelectElement;
+    
+
+    if (googleTranslateElement) {
+      googleTranslateElement.value = lang;
+      googleTranslateElement.dispatchEvent(new Event('change'));
+      setCurrentLanguage(lang === 'en' ? 'EN' : 'FR'); // Update the language state
+      
+    } else {
+      console.error('Google Translate dropdown not found');
+    }
+    
+  };
   return (
     <nav className="navbar" role="navigation" aria-label="Main navigation">
       <div className="navbar-container" role="menubar">
+      <div id="google_translate_element" style={{ display: 'none' }}></div>{' '}
+      {/* Hidden Google Translate element */}
         {navigationItems.map(item => (
           <NavLink
             key={item.label}
@@ -79,6 +99,18 @@ export const NavBar: React.FC = () => {
           </button>
         )}
       </div>
+
+      <div className="dropdown">
+            <button className="navItem">
+              {currentLanguage} {/* Display current language */}
+            </button>
+            <div className="dropdownContent">
+              <button onClick={() => handleLanguageChange('en')}>
+                English
+              </button>
+              <button onClick={() => handleLanguageChange('fr')}>French</button>
+            </div>
+          </div>
     </nav>
   );
 };
