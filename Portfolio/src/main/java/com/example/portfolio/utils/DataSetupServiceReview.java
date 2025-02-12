@@ -38,7 +38,7 @@ public class DataSetupServiceReview implements CommandLineRunner {
     setupProjects();
    //setupSkills();
     setupUsers();
-    setupReviews();
+   // setupReviews();
     }
 
     private void setupZako() {
