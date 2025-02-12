@@ -2,12 +2,11 @@ package com.example.portfolio.SkillsSubdomain.PresentationLayer;
 
 import com.example.portfolio.SkillsSubdomain.BusinessLayer.SkillService;
 import com.example.portfolio.SkillsSubdomain.DataLayer.Skill;
+import jakarta.validation.Valid;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping("api/v1/skill")
@@ -24,5 +23,10 @@ public class SkillController {
     @GetMapping()
     public Flux<SkillResponseModel> getAllSkills() {
         return skillService.getALlSkills();
+    }
+
+    @PostMapping
+    public Mono<SkillResponseModel> addSkill( @RequestBody Mono<SkillRequestModel> skillRequestModel) {
+        return skillService.addSkill(skillRequestModel);
     }
 }

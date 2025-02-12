@@ -11,6 +11,7 @@ import com.example.portfolio.ReviewSubdomain.DataLayer.Review;
 import com.example.portfolio.ReviewSubdomain.PresentationLayer.ReviewRequestDTO;
 import com.example.portfolio.ReviewSubdomain.PresentationLayer.ReviewResponseDTO;
 import com.example.portfolio.SkillsSubdomain.DataLayer.Skill;
+import com.example.portfolio.SkillsSubdomain.PresentationLayer.SkillRequestModel;
 import com.example.portfolio.SkillsSubdomain.PresentationLayer.SkillResponseModel;
 import com.example.portfolio.UserSubdomain.DataLayer.User;
 import com.example.portfolio.UserSubdomain.PresentationLayer.UserResponseModel;
@@ -37,6 +38,15 @@ public class EntityDTOUtil {
         SkillResponseModel skillResponseModel  = new SkillResponseModel();
         BeanUtils.copyProperties(skill, skillResponseModel);
         return skillResponseModel;
+    }
+
+
+    public static Skill toSkillEntity(SkillRequestModel skillRequestModel){
+        return Skill.builder()
+                .skillId(generateOrderIdString())
+                .skillName(skillRequestModel.getSkillName())
+                .skillLogo(skillRequestModel.getSkillLogo())
+                .build();
     }
 
     public static ProjectResponseModel toProjectResponseModel(Project project) {

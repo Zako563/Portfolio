@@ -5,6 +5,11 @@ export interface skillResponseModel {
   }
   
 
+export interface skillRequestModel {
+    skillName: string;
+    skillLogo: string;
+  }
+  
 
 
 export interface projectResponseModel {

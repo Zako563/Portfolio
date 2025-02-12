@@ -1,42 +1,38 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { getAllSkills } from './api/getAllSkills';
 import { projectRequestModel } from './model/projectRequestModel';
 import { projectResponseModel, skillResponseModel } from './model/projectResponseModel';
-import { getProject, updateProject } from './api/updateProject';
-import "./UpdateProject.css";
+import { updateProject } from './api/updateProject';
+import './UpdateProject.css';
 
-const UpdateProjectForm: React.FC = (): JSX.Element => {
-  const { projectId } = useParams<{ projectId: string }>();
-  const [projectName, setProjectName] = useState<string>('');
-  const [description, setDescription] = useState<string>('');
-  const [imageUrl, setImageUrl] = useState<string>('');
-  const [skills, setSkills] = useState<skillResponseModel[]>([]);
-  const [selectedSkills, setSelectedSkills] = useState<skillResponseModel[]>([]);
+interface UpdateProjectFormProps {
+  project: projectResponseModel | null; // Allow null if project is not available initially
+  onClose: () => void;
+}
+
+const UpdateProjectForm: React.FC<UpdateProjectFormProps> = ({ project, onClose }): JSX.Element => {
   const navigate = useNavigate();
 
+  // Ensure that project is available before using it
+  const [projectName, setProjectName] = useState<string>(project?.projectName || '');
+  const [description, setDescription] = useState<string>(project?.description || '');
+  const [imageUrl, setImageUrl] = useState<string>(project?.imageUrl || '');
+  const [skills, setSkills] = useState<skillResponseModel[]>([]);
+  const [selectedSkills, setSelectedSkills] = useState<skillResponseModel[]>(project?.skills || []);
+
   useEffect(() => {
-    const fetchProjectAndSkills = async (): Promise<void> => {
+    const fetchSkills = async (): Promise<void> => {
       try {
-        if (!projectId) return;
-
-        // Fetch project details
-        const project: projectResponseModel = await getProject(projectId);
-        setProjectName(project.projectName);
-        setDescription(project.description);
-        setImageUrl(project.imageUrl);
-        setSelectedSkills(project.skills);
-
-        // Fetch all skills
         const fetchedSkills = await getAllSkills();
         setSkills(fetchedSkills);
       } catch (error) {
-        console.error('Error fetching project or skills:', error);
+        console.error('Error fetching skills:', error);
       }
     };
 
-    fetchProjectAndSkills();
-  }, [projectId]);
+    fetchSkills();
+  }, []);
 
   const handleSkillToggle = (skill: skillResponseModel): void => {
     if (selectedSkills.find((s) => s.skillId === skill.skillId)) {
@@ -48,21 +44,19 @@ const UpdateProjectForm: React.FC = (): JSX.Element => {
 
   const handleSubmit = async (event: React.FormEvent): Promise<void> => {
     event.preventDefault();
-
-    if (!projectId) {
-      alert('Project ID is missing.');
-      return;
-    }
-
+  
+    if (!project) return; // Check if project exists before submitting
+  
     const updatedProject: projectRequestModel = {
       projectName,
       description,
       imageUrl,
       skills: selectedSkills,
     };
-
+  
     try {
-      await updateProject(projectId, updatedProject);
+      // Convert projectId to a string
+      await updateProject(String(project.projectId), updatedProject);
       alert('Project updated successfully!');
       navigate('/zako');
     } catch (error) {
@@ -70,6 +64,11 @@ const UpdateProjectForm: React.FC = (): JSX.Element => {
       alert('Failed to update project.');
     }
   };
+  
+
+  if (!project) {
+    return <div>Loading...</div>; // Show a loading state if project is not available
+  }
 
   return (
     <div className="update-project-form">
@@ -126,6 +125,9 @@ const UpdateProjectForm: React.FC = (): JSX.Element => {
           Update Project
         </button>
       </form>
+      <button className="btn btn-secondary mt-3" onClick={onClose}>
+        Close
+      </button>
     </div>
   );
 };
