@@ -4,6 +4,8 @@ import com.example.portfolio.MyselfSubdomain.DataLayer.Zako;
 import com.example.portfolio.MyselfSubdomain.DataLayer.ZakoRepo;
 import com.example.portfolio.ProjectSubdomain.DataLayer.Project;
 import com.example.portfolio.ProjectSubdomain.DataLayer.ProjectRepository;
+import com.example.portfolio.ReviewSubdomain.DataLayer.Review;
+import com.example.portfolio.ReviewSubdomain.DataLayer.ReviewRepository;
 import com.example.portfolio.SkillsSubdomain.DataLayer.Skill;
 import com.example.portfolio.SkillsSubdomain.DataLayer.SkillRepository;
 import com.example.portfolio.UserSubdomain.DataLayer.User;
@@ -16,6 +18,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -27,6 +30,7 @@ public class DataSetupServiceReview implements CommandLineRunner {
     private final ProjectRepository projectRepo;
     private  final SkillRepository skillRepo;
     private  final UserRepository userRepo;
+    private  final ReviewRepository reviewRepo;
 
     @Override
     public void run(String... args) throws Exception {
@@ -34,6 +38,7 @@ public class DataSetupServiceReview implements CommandLineRunner {
     setupProjects();
    //setupSkills();
     setupUsers();
+    setupReviews();
     }
 
     private void setupZako() {
@@ -237,6 +242,35 @@ public class DataSetupServiceReview implements CommandLineRunner {
                 .lastName(lastName)
                 .roles(roles)
                 .permissions(permissions)
+                .build();
+    }
+
+
+
+    private void setupReviews() {
+        Review review1 = buildReview("reviewId1", "Alice Johnson", "Great product!", true, LocalDateTime.now());
+        Review review2 = buildReview("reviewId2", "Bob Smith", "Could be better.", false,LocalDateTime.now());
+        Review review3 = buildReview("reviewId3", "Charlie Brown", "Excellent service!", true,LocalDateTime.now());
+        Review review4 = buildReview("reviewId4", "Diana Prince", "Not satisfied.", false,LocalDateTime.now());
+        Review review5 = buildReview("reviewId5", "Ethan Hunt", "Highly recommended!", true,LocalDateTime.now());
+
+        Flux.just(review1, review2, review3, review4, review5)
+                .flatMap(review -> reviewRepo.findReviewByReviewId(review.getReviewId())
+                        .switchIfEmpty(Mono.defer(() -> {
+                            System.out.println("Inserting review: " + review.getReviewId());
+                            return reviewRepo.save(review);
+                        }))
+                )
+                .subscribe();
+    }
+
+    private Review buildReview(String reviewId, String reviewerName, String reviewText, Boolean isApproved, LocalDateTime dateTime) {
+        return Review.builder()
+                .reviewId(reviewId)
+                .reviewerName(reviewerName)
+                .review(reviewText)
+                .isApproved(isApproved)
+                .reviewDate(dateTime)
                 .build();
     }
 }

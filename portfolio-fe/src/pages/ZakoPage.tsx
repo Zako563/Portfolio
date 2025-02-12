@@ -4,6 +4,8 @@ import { NavBar } from '../components/NavBar';
 import ProjectList from '../features/ProjectList';
 import './Shared.css';
 import Footer from '../components/Footer';
+import AddReviewForm from '../features/AddReviewForm';
+import ReviewList from '../features/ReviewList';
 
 // Declare HyvorTalk as a valid JSX element
 declare global {
@@ -68,13 +70,8 @@ export default function ZakoPage(): JSX.Element {
         <div className="illuminated-square"></div>
         <ZakoList />
         <ProjectList />
-
-        {/* Hyvor Talk Comment Section */}
-        <hyvor-talk-comments 
-          website-id="12545"
-          page-id={window.location.pathname} 
-          style={{ marginTop: '2rem' }} 
-        ></hyvor-talk-comments>
+        <AddReviewForm/>
+        <ReviewList/>
 
         <Footer />
       </div>

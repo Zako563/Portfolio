@@ -7,6 +7,9 @@ import com.example.portfolio.MyselfSubdomain.PresentationLayer.ZakoResponseModel
 import com.example.portfolio.ProjectSubdomain.DataLayer.Project;
 import com.example.portfolio.ProjectSubdomain.PresentationLayer.ProjectRequestModel;
 import com.example.portfolio.ProjectSubdomain.PresentationLayer.ProjectResponseModel;
+import com.example.portfolio.ReviewSubdomain.DataLayer.Review;
+import com.example.portfolio.ReviewSubdomain.PresentationLayer.ReviewRequestDTO;
+import com.example.portfolio.ReviewSubdomain.PresentationLayer.ReviewResponseDTO;
 import com.example.portfolio.SkillsSubdomain.DataLayer.Skill;
 import com.example.portfolio.SkillsSubdomain.PresentationLayer.SkillResponseModel;
 import com.example.portfolio.UserSubdomain.DataLayer.User;
@@ -65,6 +68,25 @@ public class EntityDTOUtil {
         model.setRoles(user.getRoles());
         model.setPermissions(user.getPermissions());
         return model;
+    }
+
+
+
+
+    public static ReviewResponseDTO toReviewResponseDTO(Review review) {
+        ReviewResponseDTO reviewResponseDTO  = new ReviewResponseDTO ();
+        BeanUtils.copyProperties(review, reviewResponseDTO);
+        return reviewResponseDTO;
+    }
+
+    public static Review toReviewEntity(ReviewRequestDTO reviewRequestDTO){
+        return Review.builder()
+                .reviewId(generateOrderIdString())
+                .reviewerName(reviewRequestDTO.getReviewerName())
+                .review(reviewRequestDTO.getReview())
+                .isApproved(reviewRequestDTO.getIsApproved())
+                .reviewDate(reviewRequestDTO.getReviewDate())
+                .build();
     }
 
 

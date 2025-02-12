@@ -1,0 +1,61 @@
+.add-review-form {
+  width: 100%; /* Ensure the form takes the full width */
+  padding: 20px;
+  margin: 0 auto;
+  border-radius: 8px; /* Add rounded corners to the entire form */
+}
+
+.add-review-form h2 {
+  text-align: left;
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.form-group textarea,
+.form-group input {
+  width: 100%; /* Ensure both elements span the full width */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px; /* Add rounded corners to textarea and input */
+  font-size: 16px;
+}
+
+.form-group textarea {
+  resize: vertical;
+  height: 100px;
+}
+
+.form-group input {
+  margin-top: 10px; /* Add space between textarea and input */
+}
+
+.btn2 {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px; /* Add rounded corners to button */
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px; /* Add space between input and button */
+}
+
+.btn:hover {
+  background-color: #0056b3;
+}
+
+.form-group.hidden {
+  display: none;
+}
+
+.form-group.visible {
+  display: block;
+}
