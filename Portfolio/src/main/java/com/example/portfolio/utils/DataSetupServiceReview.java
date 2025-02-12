@@ -103,7 +103,7 @@ public class DataSetupServiceReview implements CommandLineRunner {
                         Skill.builder().skillId("skillId3").skillName("React").skillLogo("https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg").build(),
                         Skill.builder().skillId("skillId4").skillName("TypeScript").skillLogo("https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg").build(),
                         Skill.builder().skillId("skillId5").skillName("MongoDb").skillLogo("https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original-wordmark.svg").build()
-                )
+                ), "https://github.com/Zako563/Portfolio"
         );
 
         Project project2 = buildProject(
@@ -117,7 +117,7 @@ public class DataSetupServiceReview implements CommandLineRunner {
                         Skill.builder().skillId("skillId3").skillName("React").skillLogo("https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg").build(),
                         Skill.builder().skillId("skillId4").skillName("TypeScript").skillLogo("https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg").build(),
                         Skill.builder().skillId("skillId5").skillName("MongoDb").skillLogo("https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original-wordmark.svg").build()
-                )
+                ), "https://github.com/Sunveerg/Noodle-Star"
         );
 
         Project project3 = buildProject(
@@ -131,7 +131,7 @@ public class DataSetupServiceReview implements CommandLineRunner {
                         Skill.builder().skillId("skillId3").skillName("React").skillLogo("https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg").build(),
                         Skill.builder().skillId("skillId4").skillName("Javascript").skillLogo("https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-plain.svg").build(),
                         Skill.builder().skillId("skillId5").skillName("Mysql").skillLogo("https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original-wordmark.svg").build()
-                )
+                ), "https://github.com/Zako563/FootballDomain"
         );
 
         Project project4 = buildProject(
@@ -145,7 +145,7 @@ public class DataSetupServiceReview implements CommandLineRunner {
                         Skill.builder().skillId("skillId3").skillName("Azure").skillLogo("https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/azure/azure-original.svg").build(),
                         Skill.builder().skillId("skillId4").skillName("C#").skillLogo("https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/csharp/csharp-original.svg").build(),
                         Skill.builder().skillId("skillId5").skillName("Mysql").skillLogo("https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original-wordmark.svg").build()
-                )
+                ),"https://github.com/Zako563/ArtworkProject"
         );
 
         Flux.just(project1, project2, project3, project4)
@@ -158,13 +158,14 @@ public class DataSetupServiceReview implements CommandLineRunner {
                 .subscribe();
     }
 
-    private Project buildProject(String projectId, String projectName, String description, String imageUrl, List<Skill> skills) {
+    private Project buildProject(String projectId, String projectName, String description, String imageUrl, List<Skill> skills, String projectLink) {
         return Project.builder()
                 .projectId(projectId)
                 .projectName(projectName)
                 .description(description)
                 .imageUrl(imageUrl)
                 .skills(skills)
+                .projectLink(projectLink)
                 .build();
     }
 

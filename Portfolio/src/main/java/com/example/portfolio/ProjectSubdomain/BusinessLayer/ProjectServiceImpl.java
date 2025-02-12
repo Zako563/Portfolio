@@ -46,6 +46,7 @@ public class ProjectServiceImpl implements ProjectService {
                     existingProject.setDescription(requestModel.getDescription());
                     existingProject.setImageUrl(requestModel.getImageUrl());
                     existingProject.setSkills(requestModel.getSkills());
+                    existingProject.setProjectLink(requestModel.getProjectLink());
                     return existingProject;
                 }))
                 .switchIfEmpty(Mono.error(new NotFoundException("Project not found with id: " + projectId)))

@@ -63,6 +63,7 @@ public class EntityDTOUtil {
                 .description(projectRequestModel.getDescription())
                 .imageUrl(projectRequestModel.getImageUrl())
                 .skills(projectRequestModel.getSkills())
+                .projectLink(projectRequestModel.getProjectLink())
                 .build();
     }
 

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState, useEffect } from 'react';
 import { projectResponseModel } from './model/projectResponseModel';
 import { getAllProjects } from './api/getAllProjects';
@@ -98,11 +99,17 @@ const ProjectList: React.FC = (): JSX.Element => {
         )}
         <div className="card project-card">
           <div className="card-img-wrapper">
-            <img
-              src={project.imageUrl}
-              alt={project.projectName}
-              className="card-img-top project-image"
-            />
+            <a 
+              href={project.projectLink} 
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              <img
+                src={project.imageUrl}
+                alt={project.projectName}
+                className="card-img-top project-image"
+              />
+            </a>
           </div>
           <div className="card-body">
             <h5 className="card-title project-name">{project.projectName}</h5>
@@ -127,6 +134,8 @@ const ProjectList: React.FC = (): JSX.Element => {
     <p className="no-items">No projects available</p>
   )}
 </div>
+
+
 
 
       {/* Add Project Modal */}

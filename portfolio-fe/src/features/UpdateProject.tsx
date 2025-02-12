@@ -18,6 +18,7 @@ const UpdateProjectForm: React.FC<UpdateProjectFormProps> = ({ project, onClose 
   const [projectName, setProjectName] = useState<string>(project?.projectName || '');
   const [description, setDescription] = useState<string>(project?.description || '');
   const [imageUrl, setImageUrl] = useState<string>(project?.imageUrl || '');
+    const [projectLink, setProjectLink] = useState<string>(project?.projectLink || '');
   const [skills, setSkills] = useState<skillResponseModel[]>([]);
   const [selectedSkills, setSelectedSkills] = useState<skillResponseModel[]>(project?.skills || []);
 
@@ -52,6 +53,7 @@ const UpdateProjectForm: React.FC<UpdateProjectFormProps> = ({ project, onClose 
       description,
       imageUrl,
       skills: selectedSkills,
+      projectLink,
     };
   
     try {
@@ -84,6 +86,18 @@ const UpdateProjectForm: React.FC<UpdateProjectFormProps> = ({ project, onClose 
             required
           />
         </div>
+
+        <div className="form-group">
+          <label htmlFor="projectLink">Project Link</label>
+          <input
+            type="text"
+            id="projectLink"
+            value={projectLink}
+            onChange={(e) => setProjectLink(e.target.value)}
+            required
+          />
+        </div>
+
         <div className="form-group">
           <label htmlFor="description">Description</label>
           <textarea
