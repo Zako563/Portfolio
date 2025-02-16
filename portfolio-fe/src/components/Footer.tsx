@@ -15,11 +15,11 @@ const Footer: React.FC = (): JSX.Element => {
                         GitHub <br></br>
                         <img src={"https://cdn-icons-png.flaticon.com/128/1051/1051275.png"} alt="github" className={"social-image"}/>
                     </a>
-                    <a href="/CvFrench.pdf" download="CvFrench.pdf" className="cv-button">
+                    <a href="https://amaranth-cathrine-79.tiiny.site/" download="CvFrench.pdf" className="cv-button">
                         French CV<br></br>
                         <img src={"https://cdn-icons-png.flaticon.com/128/2195/2195529.png"} alt="cv" className={"social-image"}/>
                     </a>
-                    <a href="/Cv.pdf" download="Cv.pdf" className="cv-button">
+                    <a href="moccasin-edi-67.tiiny.site" download="Cv.pdf" className="cv-button">
                         English CV<br></br>
                         <img src={"https://cdn-icons-png.flaticon.com/128/2195/2195529.png"} alt="cv" className={"social-image"}/>
                     </a>
