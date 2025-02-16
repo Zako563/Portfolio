@@ -131,13 +131,14 @@ const ReviewList: React.FC = (): JSX.Element => {
                       <div className="reviewer-name">{review.reviewerName}</div>
                       <p className="review-text">{review.review}</p>
                       <p className="review-date">
-                        {new Date(review.reviewDate).toLocaleString('en-CA', {
+                        {new Date(review.reviewDate + "Z").toLocaleString('en-CA', {
                           weekday: 'long',
                           year: 'numeric',
                           month: 'long',
                           day: 'numeric',
                           hour: '2-digit',
                           minute: '2-digit',
+                          timeZone: 'America/Toronto',
                         })}
                       </p>
                     </div>
