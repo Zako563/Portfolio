@@ -19,7 +19,7 @@ const Footer: React.FC = (): JSX.Element => {
                         French CV<br></br>
                         <img src={"https://cdn-icons-png.flaticon.com/128/2195/2195529.png"} alt="cv" className={"social-image"}/>
                     </a>
-                    <a href="moccasin-edi-67.tiiny.site" download="Cv.pdf" className="cv-button">
+                    <a href="https://moccasin-edi-67.tiiny.site" download="Cv.pdf" className="cv-button">
                         English CV<br></br>
                         <img src={"https://cdn-icons-png.flaticon.com/128/2195/2195529.png"} alt="cv" className={"social-image"}/>
                     </a>
