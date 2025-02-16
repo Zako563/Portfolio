@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { reviewRequestModel } from './model/reviewRequestModel';
 import { addReview } from './api/addReview';
 import './AddReviewForm.css'; // Import the CSS file
@@ -8,7 +7,6 @@ const AddReviewForm: React.FC = (): JSX.Element => {
   const [reviewerName, setReviewerName] = useState<string>('');
   const [review, setReview] = useState<string>('');
   const [isReviewFocused, setIsReviewFocused] = useState<boolean>(false); // Track focus state
-  const navigate = useNavigate();
 
   const handleSubmit = async (event: React.FormEvent): Promise<void> => {
     event.preventDefault();
@@ -22,7 +20,7 @@ const AddReviewForm: React.FC = (): JSX.Element => {
     try {
       await addReview(newReview);
       alert('Review submitted successfully!');
-      navigate('/project');
+      window.location.reload();
     } catch (error) {
       console.error('Error submitting review:', error);
       alert('Failed to submit review.');
