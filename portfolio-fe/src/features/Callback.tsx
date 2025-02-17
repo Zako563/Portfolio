@@ -77,7 +77,7 @@ const Callback: React.FC = () => {
       console.log('Access Token:', accessToken); // Log the access token
       localStorage.setItem('access_token', accessToken);
       fetchUserInfo(accessToken); // Fetch user info using the access token
-      window.location.href = '/profile'; // Redirect to home or
+      window.location.href = '/zako'; // Redirect to home or
     } else {
       console.error('Authentication failed.');
     }
