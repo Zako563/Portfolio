@@ -1,3 +1,10 @@
+![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
+![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
+
 # 🚀 My Portfolio
 
 Welcome to my personal portfolio! This project showcases my skills, experience, and the projects I have worked on. Visitors can explore my work, learn more about me, and interact by posting comments or sending me an email.
@@ -27,7 +34,7 @@ Welcome to my personal portfolio! This project showcases my skills, experience, 
    ```
 2. **Navigate to the project directory:**
    ```sh
-   cd portfolio
+   cd portfolio-fe
    ```
 3. **Install dependencies:**
    ```sh
@@ -44,7 +51,7 @@ Welcome to my personal portfolio! This project showcases my skills, experience, 
 
 ## 📬 Contact Me
 
-Feel free to reach out! You can post a comment on the site after logging in or send me an email at [your-email@example.com](mailto:your-email@example.com).
+Feel free to reach out! You can post a comment on the site after logging in or send me an email at [zakariaboudboub51@gmail.com](zakariaboudboub51@gmail.com).
 
 ## 📌 Future Improvements
 
