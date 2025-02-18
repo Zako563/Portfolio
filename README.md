@@ -13,10 +13,10 @@ Welcome to my personal portfolio! This project showcases my skills, experience, 
 
 ## 🛠️ Technologies Used
 
-- **Frontend**: React, HTML, CSS, JavaScript
-- **Backend**: Node.js, Express
-- **Database**: MongoDB / Firebase
-- **Authentication**: JWT / Firebase Auth
+- **Frontend**: React, HTML, CSS, Typescript
+- **Backend**: Spring boot
+- **Database**: MongoDB 
+- **Authentication**: JWT / Auth 0
 - **Styling**: Tailwind CSS / Bootstrap
 
 ## 🎯 Installation & Setup
