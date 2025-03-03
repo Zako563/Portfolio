@@ -68,6 +68,18 @@ public class EntityDTOUtil {
     }
 
 
+    public static Zako toZakoEntity(ZakoRequestModel zakoRequestModel){
+        return Zako.builder()
+                .zakoId(generateOrderIdString())
+                .name(zakoRequestModel.getName())
+                .title(zakoRequestModel.getTitle())
+                .summary(zakoRequestModel.getSummary())
+                .languages(zakoRequestModel.getLanguages())
+                .build();
+    }
+
+
+
 
 
     public static UserResponseModel toUserResponseModel(User user) {

@@ -5,15 +5,18 @@ import { getAllSkills } from './api/getAllSkills';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './ZakoList.css';
 import { skillResponseModel } from './model/projectResponseModel';
-import AddSkillForm from './AddSkill';  // Assuming you have an AddSkill form component
+import AddSkillForm from './AddSkill'; // Import the UpdateZakoForm
+import UpdateZakoForm from './UpdateZako';
 
 const ZakoList: React.FC = (): JSX.Element => {
   const [zakoItems, setZakoItems] = useState<zakoResponseModel[]>([]);
   const [skills, setSkills] = useState<skillResponseModel[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [skillsLoading, setSkillsLoading] = useState<boolean>(true);
-  const [showAddSkillModal, setShowAddSkillModal] = useState<boolean>(false);  // For showing skill modal
-  const [isZako, setIsZako] = useState<boolean>(false);  // Check if the user has Zako role
+  const [showAddSkillModal, setShowAddSkillModal] = useState<boolean>(false);
+  const [showUpdateZakoModal, setShowUpdateZakoModal] = useState<boolean>(false);  // State for update modal
+  const [selectedZakoId, setSelectedZakoId] = useState<string>('');  // State to store selected Zako ID
+  const [isZako, setIsZako] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchZakoData = async (): Promise<void> => {
@@ -74,7 +77,13 @@ const ZakoList: React.FC = (): JSX.Element => {
 
   const handleCloseModal = () => {
     setShowAddSkillModal(false);
+    setShowUpdateZakoModal(false);
     window.location.reload();
+  };
+
+  const handleUpdateZako = (zakoId: string) => {
+    setSelectedZakoId(zakoId);
+    setShowUpdateZakoModal(true);
   };
 
   if (loading || skillsLoading) {
@@ -86,7 +95,6 @@ const ZakoList: React.FC = (): JSX.Element => {
       {/* Hero Section */}
       <div className="hero-section">
         <div className="hero-content">
-          {/* Image on the left */}
           <div className="hero-image">
             <img
               src="https://i.postimg.cc/s1Fqn8zM/aifaceswap-3f6e8e1c5ccabb53df85850a21c486da-1.jpg"
@@ -95,14 +103,13 @@ const ZakoList: React.FC = (): JSX.Element => {
             />
           </div>
 
-          {/* Dynamic Info on the right */}
           <div className="hero-text">
             {zakoItems.length > 0 ? (
               zakoItems.map((item) => (
                 <div key={item.zakoId} className="zako-item">
-                  <p className="zako-name">{item.name}</p> {/* Name with bigger font */}
+                  <p className="zako-name">{item.name}</p>
                   <p className="zako-title">{item.title}</p>
-                  <p className="zako-summary">{item.summary}</p> {/* Summary under title */}
+                  <p className="zako-summary">{item.summary}</p>
                   <p className="zako-language">{item.language}</p>
                   <div className="language-images">
                     {(item.language || []).map((language, index) => (
@@ -117,6 +124,11 @@ const ZakoList: React.FC = (): JSX.Element => {
                       />
                     ))}
                   </div>
+                  {isZako && (
+                    <button className="btn btn-warning" onClick={() => handleUpdateZako(item.zakoId.toString())}>
+                      Update Zako
+                    </button>
+                  )}
                 </div>
               ))
             ) : (
@@ -129,7 +141,6 @@ const ZakoList: React.FC = (): JSX.Element => {
       {/* Skills Section */}
       <div className="skills-section2">
         <h2>My Skills</h2>
-        {/* Add Skill Button (only visible to Zako role) */}
         {isZako && (
           <button className="btn btn-primary mb-3" onClick={handleAddSkill}>
             Add Skill
@@ -165,6 +176,23 @@ const ZakoList: React.FC = (): JSX.Element => {
               </div>
               <div className="modal-body">
                 <AddSkillForm onClose={handleCloseModal} />
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Update Zako Modal */}
+      {showUpdateZakoModal && (
+        <div className="modal fade show d-block" style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}>
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Update Zako</h5>
+                <button className="btn-close" onClick={handleCloseModal}></button>
+              </div>
+              <div className="modal-body">
+                <UpdateZakoForm zakoId={selectedZakoId} onClose={handleCloseModal} />
               </div>
             </div>
           </div>

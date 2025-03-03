@@ -1,4 +1,6 @@
 export interface zakoRequestModel {
-  nationality: string;
-  age: number;
+  name: string;
+  title: string;
+  summary: string;
+  language: string[];
 }
