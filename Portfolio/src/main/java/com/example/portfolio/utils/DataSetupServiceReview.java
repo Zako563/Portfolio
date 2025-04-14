@@ -191,7 +191,7 @@ public class DataSetupServiceReview implements CommandLineRunner {
         Skill android= buildSkill("skillId15", "Android", "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/android/android-original.svg");
 
         Flux.just(java, springBoot, react, typescript, mongodb, javascript, mysql, dotnet, cshtml, azure, csharp, python, untiy, C, android)
-                .flatMap(skill -> skillRepo.findSkillById(skill.getSkillId())
+                .flatMap(skill -> skillRepo.findSkillBySkillId(skill.getSkillId())
                         .switchIfEmpty(Mono.defer(() -> {
                             System.out.println("Inserting skill: " + skill.getSkillId());
                             return skillRepo.save(skill);

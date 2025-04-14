@@ -10,6 +10,7 @@ const ReviewList: React.FC = (): JSX.Element => {
   const [isZako, setIsZako] = useState<boolean>(false);
   const [userData, setUserData] = useState<{ nickname: string; picture: string } | null>(null);
   const [, setLoading] = useState<boolean>(true);
+  const [currentIndex, setCurrentIndex] = useState<number>(0); // Track the current set of reviews
 
   useEffect(() => {
     const fetchUserInfo = async () => {
@@ -93,7 +94,7 @@ const ReviewList: React.FC = (): JSX.Element => {
 
   const handleDeleteReview = async (reviewId: string) => {
     try {
-    const backendUrl = process.env.REACT_APP_BACKEND_URL;
+      const backendUrl = process.env.REACT_APP_BACKEND_URL;
       const response = await fetch(`${backendUrl}/api/v1/review/${reviewId}`, {
         method: 'DELETE',
       });
@@ -109,14 +110,28 @@ const ReviewList: React.FC = (): JSX.Element => {
   };
 
   // Sort reviews by dateTime, most recent first
-  const sortedReviews = [...reviews].sort((a, b) => new Date(String(b.reviewDate)).getTime() - new Date(String(a.reviewDate)).getTime());
+  const sortedReviews = [...reviews].sort(
+    (a, b) => new Date(String(b.reviewDate)).getTime() - new Date(String(a.reviewDate)).getTime()
+  );
+
+  // Get the current set of 3 reviews to display
+  const currentReviews = sortedReviews.slice(currentIndex, currentIndex + 3);
+
+  // Handle next and previous sets of reviews
+  const nextSlide = () => {
+    setCurrentIndex((prev) => (prev + 3) % sortedReviews.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prev) => (prev - 3 + sortedReviews.length) % sortedReviews.length);
+  };
 
   return (
     <div>
       <div className="review-list-container">
         <div className="review-row">
-          {sortedReviews.length > 0 ? (
-            sortedReviews
+          {currentReviews.length > 0 ? (
+            currentReviews
               .filter((review) => isZako || review.isApproved)
               .map((review) => {
                 const isCurrentUser = userData && review.reviewerName === userData.nickname;
@@ -158,6 +173,10 @@ const ReviewList: React.FC = (): JSX.Element => {
           ) : (
             <p className="no-reviews">No reviews available</p>
           )}
+        </div>
+        <div className="carousel-controls">
+          <button onClick={prevSlide}>Previous</button>
+          <button onClick={nextSlide}>Next</button>
         </div>
       </div>
     </div>

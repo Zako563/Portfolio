@@ -6,6 +6,7 @@ import com.example.portfolio.SkillsSubdomain.DataLayer.SkillRepository;
 import com.example.portfolio.SkillsSubdomain.PresentationLayer.SkillRequestModel;
 import com.example.portfolio.SkillsSubdomain.PresentationLayer.SkillResponseModel;
 import com.example.portfolio.utils.EntityDTOUtil;
+import com.example.portfolio.utils.exceptions.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
@@ -33,9 +34,23 @@ public class SkillServiceImpl implements SkillService {
                         return EntityDTOUtil.toSkillEntity(request);
                     })
                     .flatMap(skillRepository::insert)
-                    .flatMap(savedProject-> skillRepository.findSkillById(savedProject.getSkillId()))
+                    .flatMap(savedProject-> skillRepository.findSkillBySkillId(savedProject.getSkillId()))
                     .map(EntityDTOUtil::toSkillResponseModel);
 
 
+    }
+
+    @Override
+    public Mono<SkillResponseModel> deleteSkill(String skillId) {
+        return skillRepository.findSkillBySkillId(skillId)
+                .switchIfEmpty(Mono.defer(()-> Mono.error(new NotFoundException("skill id is not found: "+ skillId))))
+                .flatMap(found ->skillRepository.delete(found)
+                        .then(Mono.just(found)))
+                .map(EntityDTOUtil::toSkillResponseModel);
+    }
+
+    @Override
+    public Mono<SkillResponseModel> getSkill(String skillId) {
+        return skillRepository.findSkillBySkillId(skillId).map(EntityDTOUtil::toSkillResponseModel);
     }
 }

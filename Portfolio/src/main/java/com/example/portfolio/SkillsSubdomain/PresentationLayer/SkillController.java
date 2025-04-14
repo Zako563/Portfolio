@@ -29,4 +29,14 @@ public class SkillController {
     public Mono<SkillResponseModel> addSkill( @RequestBody Mono<SkillRequestModel> skillRequestModel) {
         return skillService.addSkill(skillRequestModel);
     }
+
+    @DeleteMapping("/{skillId}")
+    public Mono<SkillResponseModel> deleteSkill(@PathVariable String skillId) {
+        return skillService.deleteSkill(skillId);
+    }
+
+    @GetMapping("/{skillId}")
+    public Mono<SkillResponseModel> getSkill(@PathVariable String skillId) {
+        return skillService.getSkill(skillId);
+    }
 }

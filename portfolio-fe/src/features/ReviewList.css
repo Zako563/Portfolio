@@ -17,6 +17,7 @@
   
   /* Review Item (Card) */
   .review-item {
+    flex: 0 0 32%; 
     position: relative;
     background: linear-gradient(135deg, #1A0D2E, #0A0415); /* Blue background */
     color: white;
@@ -124,3 +125,30 @@
     }
   }
   
+
+  
+  .carousel-controls {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .carousel-controls button {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 10px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .carousel-controls button:hover {
+    background: #0056b3;
+  }
+  
+  .no-reviews {
+    text-align: center;
+    font-size: 18px;
+    color: #666;
+  }

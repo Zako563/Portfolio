@@ -141,6 +141,37 @@ body {
   
 }
 
+.skill-container {
+  position: relative;
+  display:contents;
+  margin: 10px;
+  width: 100%; /* Adjust this to match your desired skill image size */
+  height: 100%;
+
+}
+
+.delete-skill-button {
+  position: relative;
+  top: -25px;
+  right: 7%;
+  background-color: #ff4444;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.delete-skill-button:hover {
+  background-color: #cc0000;
+}
+
 .skill-logos2 {
   display: flex;
   flex-wrap: wrap;

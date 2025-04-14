@@ -10,4 +10,6 @@ public interface SkillService {
 
     Flux<SkillResponseModel> getALlSkills();
     Mono<SkillResponseModel> addSkill(Mono<SkillRequestModel> requestModel);
+    Mono<SkillResponseModel> deleteSkill(String skillId);
+    Mono<SkillResponseModel> getSkill(String skillId);
 }

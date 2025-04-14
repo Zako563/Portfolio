@@ -7,5 +7,5 @@ import reactor.core.publisher.Mono;
 
 @Repository
 public interface SkillRepository extends ReactiveMongoRepository<Skill, String> {
-    Mono<Skill>  findSkillById(String id);
+    Mono<Skill>  findSkillBySkillId(String skillId);
 }

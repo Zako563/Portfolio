@@ -5,7 +5,7 @@ import { getAllSkills } from './api/getAllSkills';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './ZakoList.css';
 import { skillResponseModel } from './model/projectResponseModel';
-import AddSkillForm from './AddSkill'; // Import the UpdateZakoForm
+import AddSkillForm from './AddSkill';
 import UpdateZakoForm from './UpdateZako';
 
 const ZakoList: React.FC = (): JSX.Element => {
@@ -14,8 +14,8 @@ const ZakoList: React.FC = (): JSX.Element => {
   const [loading, setLoading] = useState<boolean>(true);
   const [skillsLoading, setSkillsLoading] = useState<boolean>(true);
   const [showAddSkillModal, setShowAddSkillModal] = useState<boolean>(false);
-  const [showUpdateZakoModal, setShowUpdateZakoModal] = useState<boolean>(false);  // State for update modal
-  const [selectedZakoId, setSelectedZakoId] = useState<string>('');  // State to store selected Zako ID
+  const [showUpdateZakoModal, setShowUpdateZakoModal] = useState<boolean>(false);
+  const [selectedZakoId, setSelectedZakoId] = useState<string>('');
   const [isZako, setIsZako] = useState<boolean>(false);
 
   useEffect(() => {
@@ -86,6 +86,23 @@ const ZakoList: React.FC = (): JSX.Element => {
     setShowUpdateZakoModal(true);
   };
 
+  const handleDeleteSkill = async (skillId: number) => {
+    try {
+      const backendUrl = process.env.REACT_APP_BACKEND_URL;
+      const response = await fetch(`${backendUrl}/api/v1/skill/${skillId}`, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to delete skill');
+      }
+
+      setSkills((prevSkills) => prevSkills.filter((skill) => skill.skillId !== skillId));
+    } catch (error) {
+      console.error('Error deleting skill:', error);
+    }
+  };
+
   if (loading || skillsLoading) {
     return <div className="loading">Loading...</div>;
   }
@@ -149,15 +166,24 @@ const ZakoList: React.FC = (): JSX.Element => {
         <div className="skill-logos2">
           {skills.length > 0 ? (
             skills.map((skill) => (
-              <img
-                key={skill.skillId}
-                src={skill.skillLogo}
-                alt={skill.skillName}
-                className="skill-logo2"
-                onError={(e) => {
-                  e.currentTarget.src = "path/to/fallback-image.png";
-                }}
-              />
+              <div key={skill.skillId} className="skill-container">
+                <img
+                  src={skill.skillLogo}
+                  alt={skill.skillName}
+                  className="skill-logo2"
+                  onError={(e) => {
+                    e.currentTarget.src = "path/to/fallback-image.png";
+                  }}
+                />
+                {isZako && (
+                  <button 
+                    className="delete-skill-button" 
+                    onClick={() => handleDeleteSkill(skill.skillId)}
+                  >
+                    &times;
+                  </button>
+                )}
+              </div>
             ))
           ) : (
             <p className="no-items">No skills available</p>

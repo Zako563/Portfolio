@@ -11,9 +11,9 @@ const ProjectList: React.FC = (): JSX.Element => {
   const [projects, setProjects] = useState<projectResponseModel[]>([]);
   const [isZako, setIsZako] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
-  const [showAddProjectModal, setShowAddProjectModal] = useState<boolean>(false); // Control modal visibility for Add Project
-  const [showUpdateProjectModal, setShowUpdateProjectModal] = useState<boolean>(false); // Control modal visibility for Update Project
-  const [selectedProject, setSelectedProject] = useState<projectResponseModel | null>(null); // Store selected project for update
+  const [showAddProjectModal, setShowAddProjectModal] = useState<boolean>(false);
+  const [showUpdateProjectModal, setShowUpdateProjectModal] = useState<boolean>(false);
+  const [selectedProject, setSelectedProject] = useState<projectResponseModel | null>(null);
 
   useEffect(() => {
     const fetchUserRoles = async () => {
@@ -59,13 +59,30 @@ const ProjectList: React.FC = (): JSX.Element => {
 
   const handleCloseModal = () => {
     setShowAddProjectModal(false);
-    setShowUpdateProjectModal(false); // Close update modal as well
+    setShowUpdateProjectModal(false);
     window.location.reload();
   };
 
   const handleUpdateProject = (project: projectResponseModel) => {
     setSelectedProject(project);
     setShowUpdateProjectModal(true);
+  };
+
+  const handleDeleteProject = async (projectId: number) => {
+    try {
+      const backendUrl = process.env.REACT_APP_BACKEND_URL;
+      const response = await fetch(`${backendUrl}/api/v1/project/${projectId}`, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to delete project');
+      }
+
+      setProjects((prevProjects) => prevProjects.filter((project) => project.projectId !== projectId));
+    } catch (error) {
+      console.error('Error deleting project:', error);
+    }
   };
 
   if (loading) {
@@ -84,59 +101,62 @@ const ProjectList: React.FC = (): JSX.Element => {
       </div>
       
       <div className="row">
-  {projects.length > 0 ? (
-    projects.map((project) => (
-      <div className="col-md-6 mb-4" key={project.projectId}>
-        {isZako && (
-          <div className="d-flex justify-content-end mb-2">
-            <button
-              className="btn btn-secondary btn-sm"
-              onClick={() => handleUpdateProject(project)} // Open the update modal
-            >
-              Update
-            </button>
-          </div>
-        )}
-        <div className="card project-card">
-          <div className="card-img-wrapper">
-            <a 
-              href={project.projectLink} 
-              target="_blank" 
-              rel="noopener noreferrer"
-            >
-              <img
-                src={project.imageUrl}
-                alt={project.projectName}
-                className="card-img-top project-image"
-              />
-            </a>
-          </div>
-          <div className="card-body">
-            <h5 className="card-title project-name">{project.projectName}</h5>
-            <p className="card-text project-description">{project.description}</p>
-          </div>
-          <div className="card-footer">
-            <div className="skill-logos">
-              {project.skills.map((skill) => (
-                <img
-                  key={skill.skillId}
-                  src={skill.skillLogo}
-                  alt={skill.skillName}
-                  className="skill-logo"
-                />
-              ))}
+        {projects.length > 0 ? (
+          projects.map((project) => (
+            <div className="col-md-6 mb-4" key={project.projectId}>
+              {isZako && (
+                <div className="d-flex justify-content-end mb-2 gap-2">
+                  <button
+                    className="btn btn-secondary btn-sm"
+                    onClick={() => handleUpdateProject(project)}
+                  >
+                    Update
+                  </button>
+                  <button
+                    className="btn btn-danger btn-sm"
+                    onClick={() => handleDeleteProject(project.projectId)}
+                  >
+                    Delete
+                  </button>
+                </div>
+              )}
+              <div className="card project-card">
+                <div className="card-img-wrapper">
+                  <a 
+                    href={project.projectLink} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                  >
+                    <img
+                      src={project.imageUrl}
+                      alt={project.projectName}
+                      className="card-img-top project-image"
+                    />
+                  </a>
+                </div>
+                <div className="card-body">
+                  <h5 className="card-title project-name">{project.projectName}</h5>
+                  <p className="card-text project-description">{project.description}</p>
+                </div>
+                <div className="card-footer">
+                  <div className="skill-logos">
+                    {project.skills.map((skill) => (
+                      <img
+                        key={skill.skillId}
+                        src={skill.skillLogo}
+                        alt={skill.skillName}
+                        className="skill-logo"
+                      />
+                    ))}
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+          ))
+        ) : (
+          <p className="no-items">No projects available</p>
+        )}
       </div>
-    ))
-  ) : (
-    <p className="no-items">No projects available</p>
-  )}
-</div>
-
-
-
 
       {/* Add Project Modal */}
       {showAddProjectModal && (
