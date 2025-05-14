@@ -186,6 +186,14 @@ body {
   object-fit: contain;
 }
 
+/* On small screens (like phones), increase the image size */
+@media (max-width: 768px) {
+  .skill-logo2 {
+    width: 20%; /* or try 15%, 25% — whatever looks best */
+  }
+}
+
+
 /* Loading State */
 .loading {
   text-align: center;

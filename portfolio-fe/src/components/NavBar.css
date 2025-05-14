@@ -63,7 +63,7 @@
 }
 
 
-dropdown {
+.dropdown {
     position: relative;
     display: inline-block;
 }
@@ -82,14 +82,27 @@ dropdown {
 }
 
 .dropdownContent button {
-    color: black;
+    color: white;
     padding: 8px 16px;
     text-decoration: none;
     display: block;
     background: none;
     border: none;
     cursor: pointer;
+    margin-right: 4%;
+    font-size: 1rem;
+    padding-right: 56%;
 }
+
+/* Smaller buttons for hamburger view */
+@media (max-width: 768px) {
+  .dropdownContent button {
+    padding: 6px 10px;
+    font-size: 0.85rem;
+    margin-right: 25%;
+  }
+}
+
 
 .dropdownContent button:hover {
     background-color: #f1f1f1;
@@ -104,3 +117,73 @@ dropdown {
     white-space: nowrap; /* Ensures text stays on one line */
     margin-left: 15%;
 }
+
+
+
+/* ───────── existing styles you already have ───────── */
+
+/* ───── Hamburger icon ───── */
+.hamburger {
+    display: none;          /* visible only <= 768 px */
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 1100;         /* above menu */
+  }
+  
+  .hamburger span {
+    width: 26px;
+    height: 3px;
+    background: #fff;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+  
+  /* morph to “X” when open */
+  .hamburger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+  
+  /* ───── Responsive rules ───── */
+  @media (max-width: 768px) {
+    /* show burger */
+    .hamburger {
+      display: flex;
+    }
+  
+    /* hide menu links by default */
+    .navbar-container {
+      display: none;
+      flex-direction: column;
+      align-items: stretch;
+      background: linear-gradient(135deg, #04071D, #0C0E23);
+      padding: 12px 0;
+      border-radius: 0 0 15px 15px;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 56;
+    }
+  
+    /* show when state “show” added */
+    .navbar-container.show {
+      display: flex;
+    }
+  
+    /* links full-width */
+    .navbar-container a,
+    .navbar-container button {
+      width: 100%;
+      text-align: left;
+      padding: 10px 20px;
+    }
+  
+    /* keep dropdown inside collapsed menu */
+    .dropdownContent {
+      position: static;
+      box-shadow: none;
+      background: transparent;
+    }
+  }
+  
